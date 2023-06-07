@@ -154,6 +154,8 @@ namespace Games
                         if (quiz != null)
                         {
                             Question.Content = quiz.Question;
+
+
                         }
                         else
                         {
