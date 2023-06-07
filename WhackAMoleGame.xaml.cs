@@ -27,20 +27,20 @@ namespace Games
     /// </summary>
     public partial class WhackAMoleGame : Page
     {
-        int score;
-        string question;
-        string answer;
-        string option1;
-        string option2;
-        string option3;
-        string option4;
+        private int score;
 
-        public WhackAMoleGame()
+		
+
+		private Random random = new Random();
+
+		public WhackAMoleGame()
         {
             InitializeComponent();
             //Question.Content = "maafafaff";
-            JsonApiCall();
-        }
+            GetQuiz();
+			//GetQuizAnswers();
+
+		}
 
 
         public void setupGame()
@@ -55,121 +55,89 @@ namespace Games
             //this.NavigationService.Navigate(mainWindow);
         }
 
-        //private async Task JsonApiCall()
-        //{
-        //    try
-        //    {
-        //        using (HttpClient client = new HttpClient())
-        //        {
-        //            var address = new Uri("https://the-trivia-api.com/api/questions/");
-        //            var result = await client.GetAsync(address).ConfigureAwait(false);
-        //            var quiz = await result.Content.ReadAsAsync<Quiz>().ConfigureAwait(false);
+		private async void GetQuiz()
+		{
+			try
+			{
+				using (HttpClient client = new HttpClient())
+				{
+					var response = await client.GetAsync("https://the-trivia-api.com/api/questions/");
+					response.EnsureSuccessStatusCode();
+
+					if (response.IsSuccessStatusCode)
+					{
+						var jsonArray = await response.Content.ReadAsAsync<List<Quiz>>();
+						var quiz = jsonArray.FirstOrDefault(); // Assuming you only need the first quiz in the array
+
+						if (quiz != null)
+						{
+							GetQuizQuestion(quiz);
+							GetQuizAnswers(quiz);
+						}
+						else
+						{
+							Question.Content = "No quiz found.";
+						}
+					}
+					else
+					{
+						Question.Content = $"Server error code {response.StatusCode}";
+					}
+				}
+			}
+			catch (AggregateException)
+			{
+			}
+		}
+
+		//method to get the quiz qustion
+		private void GetQuizQuestion(Quiz quiz)
+		{
+			Question.Content = quiz.Question;
+		}
+
+		//method to get the quiz answers
+		private void GetQuizAnswers(Quiz quiz)
+		{
+			// Retrieve the correct and incorrect answers
+			List<string> correctAnswers = new List<string>();
+			List<string> incorrectAnswers = new List<string>();
+
+			correctAnswers.Add(quiz.CorrectAnswer);
+
+			if (quiz.IncorrectAnswers != null)
+			{
+				incorrectAnswers.AddRange(quiz.IncorrectAnswers);
+			}
+
+			// Shuffle the answers and assign them to the choice labels
+			List<string> allAnswers = new List<string>();
+			allAnswers.AddRange(correctAnswers);
+			allAnswers.AddRange(incorrectAnswers);
+			Shuffle(allAnswers);
+
+			// Assign the answers to the choice labels
+			choice1.Content = allAnswers[0];
+			choice2.Content = allAnswers[1];
+			choice3.Content = allAnswers[2];
+			choice4.Content = allAnswers[3];
+
+		}
+
+		//method to shuffle the answers randomly
+		private void Shuffle<T>(List<T> list)
+		{
+			int n = list.Count;
+			while (n > 1)
+			{
+				n--;
+				int k = random.Next(n + 1);
+				T value = list[k];
+				list[k] = list[n];
+				list[n] = value;
+			}
+		}
 
 
-        //            //label1.Text = "Joke 1 " + joke.Jokes[0].Joke;
-
-        //            Question.Content = quiz.Question;
-
-
-        //            //System.Console.WriteLine(quiz.Question);
-        //            //System.Console.WriteLine(joke.Jokes[0].Joke);
-
-        //            //System.Console.WriteLine("NAmeNAmeNAmeNAmeNAmeNAmeNAmeNAmeNAmeNAme");
-        //        }
-        //    }
-        //    catch (AggregateException)
-        //    {
-        //    }
-        //}
-
-        //private async void JsonApiCall()
-        //{
-        //    try
-        //    {
-        //        using (HttpClient client = new HttpClient())
-        //        {
-        //            var response = await client.GetAsync("https://the-trivia-api.com/api/questions/");
-        //            response.EnsureSuccessStatusCode();
-
-        //            if (response.IsSuccessStatusCode)
-        //            {
-        //                Question.Content = await response.Content.ReadAsStringAsync();
-        //            }
-        //            else
-        //            {
-        //                Question.Content = $"Server error code {response.StatusCode}";
-        //            }
-
-
-
-
-        //            //Question.Content = quiz.Question;
-
-
-
-
-
-        //        }
-        //    }
-        //    catch (AggregateException)
-        //    {
-        //    }
-        //}
-
-        //    private async void JsonApiCall()
-        //{
-        //    try
-        //    {
-        //        using (HttpClient client = new HttpClient())
-        //        {
-        //            var address = new Uri("https://v2.jokeapi.dev/joke/Any?blacklistFlags=nsfw,religious,political,racist,sexist,explicit&type=single&amount=10");
-        //            var result = client.GetAsync(address).Result;
-        //            var joke = result.Content.ReadAsAsync<Transactions>().Result;
-
-        //            Question.Content = "Joke 1 " + joke.Jokes[0].Joke;
-        //            //System.Console.WriteLine(joke.Amount);
-        //            //System.Console.WriteLine(joke.Jokes[0].Joke);
-
-        //            //System.Console.WriteLine("NAmeNAmeNAmeNAmeNAmeNAmeNAmeNAmeNAmeNAme");
-        //        }
-        //    }
-        //    catch (AggregateException)
-        //    {
-        //    }
-        //}
-        private async void JsonApiCall()
-        {
-            try
-            {
-                using (HttpClient client = new HttpClient())
-                {
-                    var response = await client.GetAsync("https://the-trivia-api.com/api/questions/");
-                    response.EnsureSuccessStatusCode();
-
-                    if (response.IsSuccessStatusCode)
-                    {
-                        var jsonArray = await response.Content.ReadAsAsync<List<Quiz>>();
-                        var quiz = jsonArray.FirstOrDefault(); // Assuming you only need the first quiz in the array
-
-                        if (quiz != null)
-                        {
-                            Question.Content = quiz.Question;
-                        }
-                        else
-                        {
-                            Question.Content = "No quiz found.";
-                        }
-                    }
-                    else
-                    {
-                        Question.Content = $"Server error code {response.StatusCode}";
-                    }
-                }
-            }
-            catch (AggregateException)
-            {
-            }
-        }
-
-    }
+	}
 }
