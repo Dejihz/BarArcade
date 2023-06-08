@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
@@ -28,6 +28,7 @@ namespace Games
     public partial class WhackAMoleGame : Page
     {
         private int score;
+        private Quiz quizJson;
 
 		
 
@@ -46,6 +47,7 @@ namespace Games
         public void setupGame()
         {
             score = 0;
+            quizJson = new Quiz();
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -67,10 +69,11 @@ namespace Games
 					if (response.IsSuccessStatusCode)
 					{
 						var jsonArray = await response.Content.ReadAsAsync<List<Quiz>>();
-						var quiz = jsonArray.FirstOrDefault(); // Assuming you only need the first quiz in the array
+						var quiz = jsonArray.FirstOrDefault(); 
 
 						if (quiz != null)
 						{
+                            quizJson = quiz;
 							GetQuizQuestion(quiz);
 							GetQuizAnswers(quiz);
 						}
@@ -84,6 +87,7 @@ namespace Games
 						Question.Content = $"Server error code {response.StatusCode}";
 					}
 				}
+
 			}
 			catch (AggregateException)
 			{
@@ -138,6 +142,72 @@ namespace Games
 			}
 		}
 
+       
 
-	}
+        private void incrementScore()
+        {
+                score += 1;
+                Score.Content = "Score: " + score;
+                GetQuiz();
+            
+        }
+
+        private void endGame()
+        {
+            score += 0;
+            Score.Content = "Score: " + score;
+            WhackAMoleEnd whackAMoleEnd = new WhackAMoleEnd();
+            this.NavigationService.Navigate(whackAMoleEnd);
+            //Change to Endgame window
+        }
+
+        private void choice1click(object sender, RoutedEventArgs e)
+        {
+            if (choice1.Content == quizJson.CorrectAnswer)
+            {
+                incrementScore();
+            }
+            else
+            {
+                endGame();
+            }
+        }
+
+        private void choice2click(object sender, RoutedEventArgs e)
+        {
+            if (choice2.Content == quizJson.CorrectAnswer)
+            {
+                incrementScore();
+            }
+            else
+            {
+                endGame();
+            }
+        }
+
+        private void choice3click(object sender, RoutedEventArgs e)
+        {
+            if (choice3.Content == quizJson.CorrectAnswer)
+            {
+                incrementScore();
+            }
+            else
+            {
+                endGame();
+            }
+        }
+
+        private void choice4click(object sender, RoutedEventArgs e)
+        {
+            if (choice4.Content == quizJson.CorrectAnswer)
+            {
+                incrementScore();
+            }
+            else
+            {
+                endGame();
+            }
+        }
+    }
 }
+

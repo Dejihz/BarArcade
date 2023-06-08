@@ -13,6 +13,9 @@
     <Compile Update="QuizMain.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="WhackAMoleEnd.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="WhackAMoleGame.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -28,6 +31,9 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="QuizMain.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="WhackAMoleEnd.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="WhackAMoleGame.xaml">
