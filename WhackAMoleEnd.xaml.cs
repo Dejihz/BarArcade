@@ -25,7 +25,9 @@ namespace Games
             InitializeComponent();
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+
+
+		private void Button_Click(object sender, RoutedEventArgs e)
         {
             WhackAMoleGame whackAMole = new WhackAMoleGame();
             this.NavigationService.Navigate(whackAMole);

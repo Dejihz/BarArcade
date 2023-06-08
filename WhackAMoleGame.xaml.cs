@@ -18,20 +18,19 @@ using System.Windows.Shapes;
 using Newtonsoft.Json.Schema;
 using Newtonsoft.Json.Linq;
 using System.Net.Http.Formatting;
-
+using System.Windows.Threading;
 
 namespace Games
 {
-    /// <summary>
-    /// Interaction logic for WhackAMoleGame.xaml
-    /// </summary>
+	/// <summary>
+	/// Interaction logic for WhackAMoleGame.xaml
+	/// </summary>
     public partial class WhackAMoleGame : Page
     {
         private int score;
-        private Quiz quizJson;
-
-		
-
+		private int countDownTimer;
+		private DispatcherTimer timer;
+		private Quiz quizJson;
 		private Random random = new Random();
 
 		public WhackAMoleGame()
@@ -40,6 +39,8 @@ namespace Games
             //Question.Content = "maafafaff";
             GetQuiz();
 			//GetQuizAnswers();
+			setupGame();
+			startTimer();
 
 		}
 
@@ -48,7 +49,8 @@ namespace Games
         {
             score = 0;
             quizJson = new Quiz();
-        }
+			countDownTimer = 10; // Set the countdown time in seconds
+		}
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
@@ -79,12 +81,12 @@ namespace Games
 						}
 						else
 						{
-							Question.Content = "No quiz found.";
+							Question.Text = "No quiz found.";
 						}
 					}
 					else
 					{
-						Question.Content = $"Server error code {response.StatusCode}";
+						Question.Text = $"Server error code {response.StatusCode}";
 					}
 				}
 
@@ -97,7 +99,7 @@ namespace Games
 		//method to get the quiz qustion
 		private void GetQuizQuestion(Quiz quiz)
 		{
-			Question.Content = quiz.Question;
+			Question.Text = quiz.Question;
 		}
 
 		//method to get the quiz answers
@@ -154,31 +156,47 @@ namespace Games
 
         private void endGame()
         {
-            score += 0;
-            Score.Content = "Score: " + score;
-            WhackAMoleEnd whackAMoleEnd = new WhackAMoleEnd();
-            this.NavigationService.Navigate(whackAMoleEnd);
-            //Change to Endgame window
-        }
+			
+			try
+			{
+				score += 0;
+				Score.Content = "Score: " + score;
+				WhackAMoleEnd whackAMoleEnd = new WhackAMoleEnd();
+				NavigationService.Navigate(whackAMoleEnd); // Navigate to the new page
+				Window window = Window.GetWindow(this);
+				window.Content = whackAMoleEnd;
+			}
+			catch (NullReferenceException ex)
+			{
+				// Handle the exception.
+				MessageBox.Show("The NavigationService property is null.");
+			}
+		}
 
         private void choice1click(object sender, RoutedEventArgs e)
         {
-            if (choice1.Content == quizJson.CorrectAnswer)
-            {
-                incrementScore();
-            }
-            else
-            {
-                endGame();
-            }
-        }
+			if (choice1.Content == quizJson.CorrectAnswer)
+			{
+				incrementScore();
+				startTimer();
+				timer.Stop();
+			}
+			else
+			{
+				endGame();
+			}
+
+
+		}
 
         private void choice2click(object sender, RoutedEventArgs e)
         {
             if (choice2.Content == quizJson.CorrectAnswer)
             {
                 incrementScore();
-            }
+				startTimer();
+				timer.Stop();
+			}
             else
             {
                 endGame();
@@ -190,7 +208,9 @@ namespace Games
             if (choice3.Content == quizJson.CorrectAnswer)
             {
                 incrementScore();
-            }
+				startTimer();
+				timer.Stop();
+			}
             else
             {
                 endGame();
@@ -202,12 +222,44 @@ namespace Games
             if (choice4.Content == quizJson.CorrectAnswer)
             {
                 incrementScore();
-            }
+				startTimer();
+				timer.Stop();
+			}
             else
             {
                 endGame();
             }
         }
-    }
+
+		private void startTimer()
+		{
+			// Create a new instance of DispatcherTimer
+			countDownTimer = 10;
+			timer = new DispatcherTimer();
+			timer.Interval = TimeSpan.FromSeconds(1); // Set the interval to 1 second
+			timer.Tick += timer_Tick; // Set the event handler for the Tick event
+			timer.Start(); // Start the timer
+		}
+
+
+		private void timer_Tick(object sender, EventArgs e)
+		{
+			// Update the countdown timer and display the remaining time
+			countDownTimer--;
+			TimeSpan timeRemaining = TimeSpan.FromSeconds(countDownTimer);
+			Timer.Content = $"Timer: {timeRemaining.Minutes}:{timeRemaining.Seconds:D2}";
+
+			if (countDownTimer <= 0)
+			{
+				// Stop the timer when countdown is complete
+				timer.Stop();
+				Timer.Content = "Countdown complete!";
+				endGame();
+
+			}
+		}
+
+	}
 }
+
 

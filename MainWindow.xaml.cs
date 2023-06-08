@@ -23,9 +23,15 @@ namespace Games
         public MainWindow()
         {
             InitializeComponent();
-            TitlePage.Visibility = Visibility.Collapsed;
+
+			/*WindowState = WindowState.Maximized;
+			WindowStyle = WindowStyle.None;
+			ResizeMode = ResizeMode.NoResize;*/
+
+			TitlePage.Visibility = Visibility.Collapsed;
             //ArcadeMain.Content = new WhackAMoleMain();
             ArcadeMain.Content = new WhackAMoleGame();
+
         }
 
         private void Frame_Navigated(object sender, NavigationEventArgs e)

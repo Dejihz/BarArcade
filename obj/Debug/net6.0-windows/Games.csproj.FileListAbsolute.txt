@@ -120,3 +120,5 @@ C:\Users\Gebruiker\Documents\GitHub\BarArcade\obj\Debug\net6.0-windows\Games.gen
 C:\Users\Gebruiker\Documents\GitHub\BarArcade\obj\Debug\net6.0-windows\ref\Games.dll
 C:\Users\Gebruiker\Documents\GitHub\BarArcade\obj\Debug\net6.0-windows\WhackAMoleEnd.g.cs
 C:\Users\Gebruiker\Documents\GitHub\BarArcade\obj\Debug\net6.0-windows\WhackAMoleEnd.baml
+C:\Users\Pepelito\Documents\GitHub\BarArcade\obj\Debug\net6.0-windows\WhackAMoleEnd.g.cs
+C:\Users\Pepelito\Documents\GitHub\BarArcade\obj\Debug\net6.0-windows\WhackAMoleEnd.baml
