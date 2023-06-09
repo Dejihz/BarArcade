@@ -12,7 +12,7 @@
       }
     ],
     "additionalProbingPaths": [
-      "C:\\Users\\Pepelito\\.dotnet\\store\\|arch|\\|tfm|",
+      "C:\\Users\\Gebruiker\\.dotnet\\store\\|arch|\\|tfm|",
       "C:\\Users\\Pepelito\\.nuget\\packages"
     ],
     "configProperties": {
