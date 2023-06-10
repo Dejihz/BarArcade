@@ -19,6 +19,7 @@ using Newtonsoft.Json.Schema;
 using Newtonsoft.Json.Linq;
 using System.Net.Http.Formatting;
 using System.Windows.Threading;
+using System.Media;
 
 namespace Games
 {
@@ -29,18 +30,26 @@ namespace Games
     {
         private int score;
 		private int countDownTimer;
-		private DispatcherTimer timer;
 		private Quiz quizJson;
 		private Random random = new Random();
 
-		public WhackAMoleGame()
+        private SoundPlayer win = new SoundPlayer(@"C:\Users\Gebruiker\Documents\GitHub\temp\sounds\win.wav");
+
+
+        private SoundPlayer fail = new SoundPlayer(@"C:\Users\Gebruiker\Documents\GitHub\temp\sounds\fail.wav");
+
+
+        private SoundPlayer completeGame = new SoundPlayer(@"C:\Users\Gebruiker\Documents\GitHub\temp\sounds\gameComplete.wav");
+
+        public WhackAMoleGame()
         {
             InitializeComponent();
             //Question.Content = "maafafaff";
             GetQuiz();
 			//GetQuizAnswers();
 			setupGame();
-			startTimer();
+            quizTimer();
+            showGame();
 
 		}
 
@@ -49,8 +58,10 @@ namespace Games
         {
             score = 0;
             quizJson = new Quiz();
-			countDownTimer = 10; // Set the countdown time in seconds
-		}
+            countDownTimer = 30;
+
+            
+        }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
@@ -61,7 +72,8 @@ namespace Games
 
 		private async void GetQuiz()
 		{
-			try
+
+            try
 			{
 				using (HttpClient client = new HttpClient())
 				{
@@ -78,11 +90,17 @@ namespace Games
                             quizJson = quiz;
 							GetQuizQuestion(quiz);
 							GetQuizAnswers(quiz);
-						}
+
+                            enableAllBtns();
+                            showGame();
+                        }
 						else
 						{
-							Question.Text = "No quiz found.";
-						}
+                            //Replace with end scenario and you have answered all the questions at the time come back later
+							endText.Text = "You have answered all the questions at this time, try again later";
+                            endGame();
+                            playSound(completeGame);
+                        }
 					}
 					else
 					{
@@ -159,13 +177,14 @@ namespace Games
 			
 			try
 			{
-				score += 0;
+				score = 0;
 				Score.Content = "Score: " + score;
-				WhackAMoleEnd whackAMoleEnd = new WhackAMoleEnd();
-				NavigationService.Navigate(whackAMoleEnd); // Navigate to the new page
-				Window window = Window.GetWindow(this);
-				window.Content = whackAMoleEnd;
-			}
+                //WhackAMoleEnd whackAMoleEnd = new WhackAMoleEnd();
+                //NavigationService.Navigate(whackAMoleEnd); // Navigate to the new page
+                //Window window = Window.GetWindow(this);
+                //window.Content = whackAMoleEnd;
+                showEnd();
+            }
 			catch (NullReferenceException ex)
 			{
 				// Handle the exception.
@@ -177,13 +196,13 @@ namespace Games
         {
 			if (choice1.Content == quizJson.CorrectAnswer)
 			{
-				incrementScore();
-				startTimer();
-				timer.Stop();
-			}
+                disableAllBtns();
+            }
 			else
 			{
-				endGame();
+
+                playSound(fail);
+                endGame();
 			}
 
 
@@ -193,12 +212,12 @@ namespace Games
         {
             if (choice2.Content == quizJson.CorrectAnswer)
             {
-                incrementScore();
-				startTimer();
-				timer.Stop();
-			}
+                disableAllBtns();
+            }
             else
             {
+
+                playSound(fail);
                 endGame();
             }
         }
@@ -207,12 +226,12 @@ namespace Games
         {
             if (choice3.Content == quizJson.CorrectAnswer)
             {
-                incrementScore();
-				startTimer();
-				timer.Stop();
-			}
+                disableAllBtns();
+            }
             else
             {
+
+                playSound(fail);
                 endGame();
             }
         }
@@ -221,45 +240,106 @@ namespace Games
         {
             if (choice4.Content == quizJson.CorrectAnswer)
             {
-                incrementScore();
-				startTimer();
-				timer.Stop();
-			}
+                disableAllBtns();
+            }
             else
             {
+
+                playSound(fail);
                 endGame();
             }
         }
 
-		private void startTimer()
-		{
-			// Create a new instance of DispatcherTimer
-			countDownTimer = 10;
-			timer = new DispatcherTimer();
-			timer.Interval = TimeSpan.FromSeconds(1); // Set the interval to 1 second
-			timer.Tick += timer_Tick; // Set the event handler for the Tick event
-			timer.Start(); // Start the timer
-		}
+        private void disableAllBtns()
+        {
+            incrementScore();
+            playSound(win);
+            countDownTimer = 30;
+            choice1.IsEnabled = false;
+            choice2.IsEnabled = false;
+            choice3.IsEnabled = false;
+            choice4.IsEnabled = false;
+        }
 
+        private void enableAllBtns()
+        {
+            choice1.IsEnabled = true;
+            choice2.IsEnabled = true;
+            choice3.IsEnabled = true;
+            choice4.IsEnabled = true;
+        }
 
-		private void timer_Tick(object sender, EventArgs e)
-		{
-			// Update the countdown timer and display the remaining time
-			countDownTimer--;
-			TimeSpan timeRemaining = TimeSpan.FromSeconds(countDownTimer);
-			Timer.Content = $"Timer: {timeRemaining.Minutes}:{timeRemaining.Seconds:D2}";
+        private void RetryClick(object sender, RoutedEventArgs e)
+        {
+            showGame();
+            GetQuiz();
 
-			if (countDownTimer <= 0)
-			{
-				// Stop the timer when countdown is complete
-				timer.Stop();
-				Timer.Content = "Countdown complete!";
-				endGame();
+            countDownTimer = 30;
+        }
 
-			}
-		}
+        private void toStoreClick(object sender, RoutedEventArgs e)
+        {
+            //Todo
+        }
 
-	}
+        private void quizTimer()
+        {
+            DispatcherTimer dt = new DispatcherTimer();
+            dt.Interval = TimeSpan.FromSeconds(1);
+            dt.Tick += dtTicker;
+            dt.Start();
+        }
+
+        private void playSound(SoundPlayer name)
+        {
+           name.Load();
+           name.Play();
+        }
+
+        private void dtTicker(object sender, EventArgs e)
+        {
+            countDownTimer--;
+            Timer.Content ="Timer: " + countDownTimer.ToString();
+            if(countDownTimer == 0)
+            {
+                endGame();
+            }
+
+        }
+        //TImer. ENd came calls the hide
+        //UiEnd hid all element and alterante
+
+        private void showGame()
+        {
+            Score.Visibility = Visibility.Visible;
+            Timer.Visibility = Visibility.Visible;
+            Question.Visibility = Visibility.Visible;
+            choice1.Visibility = Visibility.Visible;
+            choice2.Visibility = Visibility.Visible;
+            choice3.Visibility = Visibility.Visible;
+            choice4.Visibility = Visibility.Visible;
+            endText.Visibility = Visibility.Collapsed;
+            retry.Visibility = Visibility.Collapsed;
+            toStore.Visibility = Visibility.Collapsed;
+        }
+
+        private void showEnd()
+        {
+            endText.Text = "You got the answer wrong, The correct answer is " + quizJson.CorrectAnswer;
+            Score.Visibility = Visibility.Collapsed;
+            Timer.Visibility = Visibility.Collapsed;
+            Question.Visibility = Visibility.Collapsed;
+            choice1.Visibility = Visibility.Collapsed;
+            choice2.Visibility = Visibility.Collapsed;
+            choice3.Visibility = Visibility.Collapsed;
+            choice4.Visibility = Visibility.Collapsed;
+            endText.Visibility = Visibility.Visible;
+            retry.Visibility = Visibility.Visible;
+            toStore.Visibility = Visibility.Visible;
+        }
+
+    }
+
 }
 
 

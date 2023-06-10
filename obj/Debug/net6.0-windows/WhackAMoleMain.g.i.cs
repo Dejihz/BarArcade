@@ -53,7 +53,7 @@ namespace Games {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/Games;V1.0.0.0;component/whackamolemain.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/Games;component/whackamolemain.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\WhackAMoleMain.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);

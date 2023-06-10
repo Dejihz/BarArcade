@@ -53,7 +53,7 @@ namespace Games {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/Games;V1.0.0.0;component/quizmain.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/Games;component/quizmain.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\QuizMain.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);

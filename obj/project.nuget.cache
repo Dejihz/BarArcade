@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "qK8QJBitw47QGuXwna0m3Si8kF22t6UVTNsTyMfbdkt1o1j/Z6k1fQB/n8wGwc069kEIR/p8FM4m4xnXJUzGDA==",
+  "dgSpecHash": "luGLbLmNFNHsQPgYBVKhD2lVt3jQ/OPz4AuymALP+vJnDobbo5d/fTa1VjVVBgs922E8dhjWDVmyhk+1GFBvbQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Gebruiker\\Documents\\GitHub\\BarArcade\\Games.csproj",
+  "projectFilePath": "C:\\Users\\Gebruiker\\Documents\\GitHub\\temp\\Games.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Gebruiker\\.nuget\\packages\\microsoft.aspnetcore.http.abstractions\\2.2.0\\microsoft.aspnetcore.http.abstractions.2.2.0.nupkg.sha512",
     "C:\\Users\\Gebruiker\\.nuget\\packages\\microsoft.aspnetcore.http.extensions\\2.2.0\\microsoft.aspnetcore.http.extensions.2.2.0.nupkg.sha512",

@@ -41,5 +41,16 @@
         FontSize="24" Background="#20419A" FontWeight="Bold" Grid.ColumnSpan="3" 
         Click="choice4click" Margin="40,470,40,0" Foreground="White"/>
 
+<!--END SCREEN ITEMS-->
+        <TextBlock Grid.Column="1" x:Name="endText" Text="" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="30" Background="#20419A" FontWeight="Bold" Padding="10" Foreground="White" TextTrimming="CharacterEllipsis" TextWrapping="Wrap" RenderTransformOrigin="0.406,1.224" Margin="0,123,0,0"/>
+
+        <Button x:Name="retry" Content="Retry" VerticalAlignment="Top" 
+            FontSize="24" Background="#20419A" FontWeight="Bold" Grid.ColumnSpan="3" 
+            Click="RetryClick" Margin="40,330,40,0" Foreground="White"/>
+        
+        <Button x:Name="toStore" Grid.Column="0" Content="Back To Store" VerticalAlignment="Top" 
+            FontSize="24" Background="#20419A" FontWeight="Bold" Grid.ColumnSpan="3" 
+            Click="toStoreClick" Margin="40,385,40,0" Foreground="White"/>
+
     </Grid>
 </Page>
