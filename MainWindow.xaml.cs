@@ -1,4 +1,5 @@
-﻿using System;
+using Games.Files;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -24,13 +25,9 @@ namespace Games
         {
             InitializeComponent();
 
-			/*WindowState = WindowState.Maximized;
-			WindowStyle = WindowStyle.None;
-			ResizeMode = ResizeMode.NoResize;*/
-
-			TitlePage.Visibility = Visibility.Collapsed;
-            //ArcadeMain.Content = new WhackAMoleMain();
-            ArcadeMain.Content = new WhackAMoleGame();
+            //database.InitializeDatabase();
+            //database.coinfaker();
+            //database.highscorefaker();
 
         }
 
@@ -42,8 +39,8 @@ namespace Games
         private void whackamoleClick(object sender, RoutedEventArgs e)
         {
             TitlePage.Visibility = Visibility.Collapsed;
-            //ArcadeMain.Content = new WhackAMoleMain();
-            ArcadeMain.Content = new WhackAMoleGame();
+            ArcadeMain.Content = new WhackAMoleMain();
+            //ArcadeMain.Content = new WhackAMoleGame();
 
         }
 

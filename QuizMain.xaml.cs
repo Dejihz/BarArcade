@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +23,13 @@ namespace Games
         public QuizMain()
         {
             InitializeComponent();
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            QuizGame quizGame = new QuizGame();
+            this.NavigationService.Navigate(quizGame);
+
         }
     }
 }
