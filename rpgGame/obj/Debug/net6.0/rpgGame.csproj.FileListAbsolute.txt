@@ -1,5 +1,0 @@
-C:\Users\humao\source\repos\rpgGame\obj\Debug\net6.0\rpgGame.csproj.AssemblyReference.cache
-C:\Users\humao\source\repos\rpgGame\obj\Debug\net6.0\rpgGame.GeneratedMSBuildEditorConfig.editorconfig
-C:\Users\humao\source\repos\rpgGame\obj\Debug\net6.0\rpgGame.AssemblyInfoInputs.cache
-C:\Users\humao\source\repos\rpgGame\obj\Debug\net6.0\rpgGame.AssemblyInfo.cs
-C:\Users\humao\source\repos\rpgGame\obj\Debug\net6.0\rpgGame.csproj.CoreCompileInputs.cache

@@ -1,0 +1,5 @@
+C:\Users\humao\source\repos\barArcade\obj\Debug\net6.0\barArcade.csproj.AssemblyReference.cache
+C:\Users\humao\source\repos\barArcade\obj\Debug\net6.0\barArcade.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\humao\source\repos\barArcade\obj\Debug\net6.0\barArcade.AssemblyInfoInputs.cache
+C:\Users\humao\source\repos\barArcade\obj\Debug\net6.0\barArcade.AssemblyInfo.cs
+C:\Users\humao\source\repos\barArcade\obj\Debug\net6.0\barArcade.csproj.CoreCompileInputs.cache
