@@ -4,9 +4,13 @@
   <Platform>DesktopGL</Platform>
   <Config />
   <SourceFiles>
+    <File>C:/Users/humao/source/repos/barArcadeGame/Content/arcade/items.png</File>
+    <File>C:/Users/humao/source/repos/barArcadeGame/Content/barMap/kitchen.png</File>
     <File>C:/Users/humao/source/repos/barArcadeGame/Content/Font/defaultFont.spritefont</File>
+    <File>C:/Users/humao/source/repos/barArcadeGame/Content/picture/arcadeMachine.png</File>
     <File>C:/Users/humao/source/repos/barArcadeGame/Content/picture/checked.png</File>
     <File>C:/Users/humao/source/repos/barArcadeGame/Content/picture/coin.png</File>
+    <File>C:/Users/humao/source/repos/barArcadeGame/Content/picture/door.png</File>
     <File>C:/Users/humao/source/repos/barArcadeGame/Content/picture/exit.png</File>
     <File>C:/Users/humao/source/repos/barArcadeGame/Content/picture/hero.png</File>
     <File>C:/Users/humao/source/repos/barArcadeGame/Content/picture/next.png</File>
@@ -68,6 +72,10 @@
     <File>C:/Users/humao/source/repos/barArcadeGame/Content/Tiny Adventure Pack/Skeleton/Walk/Skel_walk_up.png</File>
   </SourceFiles>
   <DestFiles>
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />

@@ -30,8 +30,7 @@ namespace barArcadeGame
         }
 
         public void Draw()
-        {
-           
+        {  
             Globals.SpriteBatch.DrawString(_font, Text, _pos, Color.White);
         }
     }

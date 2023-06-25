@@ -14,6 +14,36 @@
 
 #---------------------------------- Content ---------------------------------#
 
+#begin arcade/arcadeRoom.tmx
+/copy:arcade/arcadeRoom.tmx
+
+#begin arcade/items.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:arcade/items.png
+
+#begin barMap/kitchen.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:barMap/kitchen.png
+
+#begin barMap/mapBar.tmx
+/copy:barMap/mapBar.tmx
+
 #begin Font/defaultFont.spritefont
 /importer:FontDescriptionImporter
 /processor:FontDescriptionProcessor
@@ -21,6 +51,18 @@
 /processorParam:TextureFormat=Compressed
 /build:Font/defaultFont.spritefont
 
+#begin picture/arcadeMachine.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:picture/arcadeMachine.png
+
 #begin picture/checked.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -68,6 +110,30 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:picture/coin.png
+
+#begin picture/door.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:picture/door.png
+
+#begin picture/door.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:picture/door.png
 
 #begin picture/exit.png
 /importer:TextureImporter

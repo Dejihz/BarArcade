@@ -21,11 +21,12 @@ namespace barArcadeGame
         public Player()
         {
             playerSprite = new AnimatedSprite[10];
-            pos = new Vector2(200, 50);
+            pos = new Vector2(600, 50);
             playerBounds = new Rectangle((int)pos.X - 8/*centered at centre*/, (int)pos.Y - 8, 16, 17);
         }
-        public void Load(SpriteSheet[] spriteSheets)
+        public void Load(SpriteSheet[] spriteSheets,Vector2 location)
         {
+            pos = location;
             for (int i = 0; i < spriteSheets.Length; i++)
             {
                 sheet = spriteSheets[i];

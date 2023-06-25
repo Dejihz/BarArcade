@@ -119,7 +119,7 @@ namespace barArcadeGame._Managers
 
         public static void Draw()
         {
-           // Globals.SpriteBatch.Begin();
+            //Globals.SpriteBatch.Begin();
             Label.SetText(Coins.ToString());
             Label.Draw();
             Globals.SpriteBatch.Draw(_textureCoin, new(0, Globals.Bounds.Y - 40), null, Color.White * 0.75f, 0f, Vector2.Zero, 0.1f, SpriteEffects.None, 1f);
