@@ -21,7 +21,6 @@ namespace barArcadeGame
         public Player()
         {
             playerSprite = new AnimatedSprite[10];
-
             pos = new Vector2(200, 50);
             playerBounds = new Rectangle((int)pos.X - 8/*centered at centre*/, (int)pos.Y - 8, 16, 17);
         }
@@ -85,10 +84,11 @@ namespace barArcadeGame
                 rasterizerState: null,
                 depthStencilState: null,
                 transformMatrix: transformMatrix);/*<-This is the main thing*/
-            if (isIdle)
-                spriteBatch.Draw(playerSprite[0], pos);
+            if (isIdle) 
+                spriteBatch.Draw(playerSprite[0], pos,0, new Vector2(3,3));
             else
-                spriteBatch.Draw(playerSprite[1], pos);
+                spriteBatch.Draw(playerSprite[1], pos,0, new Vector2(3,3));
+                
             spriteBatch.End();
         }
     }

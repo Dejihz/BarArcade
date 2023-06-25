@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Text;
 using TiledSharp;
 
-namespace barArcadeGame
+namespace barArcadeGame._Managers
 {
     public class TileMapManager
     {
@@ -52,10 +52,10 @@ namespace barArcadeGame
                     {//Some complex math to check for the tile position :(
                         int tileFrame = gid - 1;
                         int column = tileFrame % tilesetTilesWide;
-                        int row = (int)Math.Floor((double)tileFrame / (double)tilesetTilesWide);
-                        float x = (j % map.Width) * map.TileWidth;
+                        int row = (int)Math.Floor(tileFrame / (double)tilesetTilesWide);
+                        float x = j % map.Width * map.TileWidth;
                         float y = (float)Math.Floor(j / (double)map.Width) * map.TileHeight;
-                        Rectangle tilesetRec = new Rectangle((tileWidth) * column, (tileHeight) * row, tileWidth, tileHeight);//The origin rectangle
+                        Rectangle tilesetRec = new Rectangle(tileWidth * column, tileHeight * row, tileWidth, tileHeight);//The origin rectangle
                         spriteBatch.Draw(tileset, new Rectangle((int)x, (int)y, tileWidth, tileHeight), tilesetRec, Color.White);//Drawing the tile
                     }
                 }

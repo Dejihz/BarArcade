@@ -22,7 +22,7 @@ namespace barArcadeGame
         public NPCMick()
         {
             playerSprite = new AnimatedSprite[10];
-            pos = new Vector2(100, 100);
+            pos = new Vector2(400, 600);
             playerBounds = new Rectangle((int)pos.X - 8/*centered at centre*/, (int)pos.Y - 8, 16, 17);
         }
 
@@ -43,9 +43,7 @@ namespace barArcadeGame
             playerBounds.X = (int)pos.X - 8;//Apparently by default the rectangle gets centred at the player's centre when using monogame extended's draw function.
             playerBounds.Y = (int)pos.Y - 8;
 
-            playerSprite[0].Update(gameTime);
-
-    
+            playerSprite[0].Update(gameTime);   
         }
 
         public void Draw(SpriteBatch spriteBatch, Matrix matrix, Matrix transformMatrix)

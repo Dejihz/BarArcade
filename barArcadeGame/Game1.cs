@@ -9,11 +9,10 @@ using System;
 using System.Numerics;
 using TiledSharp;
 using System.Collections.Generic;
-using GeonBit.UI.Entities;
-using GeonBit.UI;
 using System.Runtime.ConstrainedExecution;
-using MonoGame.UI.Forms;
 using Vector2 = Microsoft.Xna.Framework.Vector2;
+using barArcadeGame._Managers;
+using System.Collections;
 
 namespace barArcadeGame
 {
@@ -22,7 +21,8 @@ namespace barArcadeGame
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
         private Player player;
-        private NPCJack jack;
+        //private NPCJack jack;
+        private Jack jack;
         private NPCMick mick;
         private TmxMap map;
         private TileMapManager mapManager;
@@ -37,6 +37,7 @@ namespace barArcadeGame
             _graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
+         
         }
 
         private void calculateTransaction()
@@ -44,29 +45,34 @@ namespace barArcadeGame
             var dx = (_graphics.PreferredBackBufferWidth / 2) - player.pos.X;
             var dy = (_graphics.PreferredBackBufferHeight / 2) - player.pos.Y;
             _translation = Matrix.CreateTranslation(dx, dy, 0f);
-
         }
 
         protected override void Initialize()
         {
             Globals.Game = this;
-     
             player = new Player();
-            jack = new NPCJack();
+            //jack = new NPCJack();
+          
             mick = new NPCMick();
-
-            _graphics.PreferredBackBufferWidth = 200 * 2;//Making the window size twice our tilemap size
-            _graphics.PreferredBackBufferHeight = 200 * 2;
-            _graphics.ApplyChanges();
+           
+            //_graphics.PreferredBackBufferWidth = 200 * 2;//Making the window size twice our tilemap size
+            //_graphics.PreferredBackBufferHeight = 200 * 2;
+            //_graphics.ApplyChanges();
             Window.Title = "Bararcade Game";
 
-
+            //var Width = _graphics.PreferredBackBufferWidth;
+            //var Height = _graphics.PreferredBackBufferHeight;
+            //Globals.Bounds = new(Width, Height);
+            Globals.Bounds = new(1536, 1024);
+            _graphics.PreferredBackBufferWidth = Globals.Bounds.X;
+            _graphics.PreferredBackBufferHeight = Globals.Bounds.Y;
             var Width = _graphics.PreferredBackBufferWidth;
             var Height = _graphics.PreferredBackBufferHeight;
-            Globals.Bounds = new(Width, Height);
+            _graphics.ApplyChanges();
             var WindowSize = new System.Numerics.Vector2(Width, Height);
             var mapSize = new System.Numerics.Vector2(400, 400);//Our tile map size
             matrix = Matrix.CreateScale(new System.Numerics.Vector3(WindowSize / mapSize, 1));
+            Globals.Matrix = matrix;
             
             base.Initialize();
         }
@@ -91,7 +97,8 @@ namespace barArcadeGame
             SpriteSheet[] sheets = { Content.Load<SpriteSheet>("Tiny Adventure Pack/Character/char_two/Idle/playerSheetIdle.sf",new JsonContentLoader()),
                                     Content.Load<SpriteSheet>("Tiny Adventure Pack/Character/char_two/Walk/playerSheetWalk.sf",new JsonContentLoader())};
             player.Load(sheets);
-            jack.Load(sheets);
+       
+            //jack.Load(sheets);
             // TODO: use this.Content to load your game content here
         }
 
@@ -128,8 +135,9 @@ namespace barArcadeGame
                                     Content.Load<SpriteSheet>("Tiny Adventure Pack/Character/char_two/Walk/playerSheetWalk.sf",new JsonContentLoader())};
             player.Load(sheets);
             //loadPanel();
-            jack.Load(sheets);
+            //jack.Load(sheets);
             mick.Load(sheets);
+            jack = new Jack();
             _gameManager = new();
             // TODO: use this.Content to load your game content here
         }
@@ -140,7 +148,7 @@ namespace barArcadeGame
                 Exit();
             var initpos = player.pos;
             player.Update(gameTime);
-            jack.Update(gameTime);
+            jack.Update();
             foreach (var rect in collisionObjects)
             {
                 if (rect.Intersects(player.playerBounds))
@@ -154,30 +162,29 @@ namespace barArcadeGame
             {
                 if (rect.Intersects(player.playerBounds))
                 {
-                    //player.pos = initpos;
-                    //player.isIdle = true;
                     LoadSecondScene();
-                    //Exit();
                 }
             }
 
             if (jack.playerBounds.Intersects(player.playerBounds))
             {
-                _gameManager.runDialogue();
+                jack.stop();
+                _gameManager.runJackDialogue();
             }
             else
             {
-                _gameManager.hideDialogue();
+                jack.walk();
+                _gameManager.hideJackDialogue();
             }
 
-            //else if (mick.playerBounds.Intersects(player.playerBounds))
-            //{
-            //    _gameManager.runDialogue();
-            //}
-            //else
-            //{
-            //    _gameManager.hideDialogue();
-            //}
+            if (mick.playerBounds.Intersects(player.playerBounds))
+            {
+                _gameManager.runMickDialogue();
+            }
+            else
+            {
+                _gameManager.hideMickDialogue();
+            }
 
             // TODO: Add your update logic
             _gameManager.Update();
@@ -189,17 +196,22 @@ namespace barArcadeGame
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
-           // _spriteBatch.Begin();
+            // _spriteBatch.Begin();
+
             // TODO: Add your drawing code here
             mapManager.Draw(matrix, _translation);
             player.Draw(_spriteBatch, matrix, transformMatrix: _translation);
+
             _spriteBatch.Begin();
+           
             _gameManager.Draw();
             _spriteBatch.End();
 
             // _spriteBatch.DrawString(spriteFont, "Hello, World!", new System.Numerics.Vector2(100, 100), Color.White);
             jack.Draw(_spriteBatch, matrix, transformMatrix: _translation);
             mick.Draw(_spriteBatch, matrix, transformMatrix: _translation);
+
+           // jack.Draw(Globals.SpriteBatch, Globals.Matrix, transformMatrix: _translation);
             // _spriteBatch.End();
             base.Draw(gameTime);
         }

@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace barArcadeGame
+namespace barArcadeGame._Managers
 {
     public static class InputManager
     {
@@ -22,11 +22,11 @@ namespace barArcadeGame
                         && ms.Y >= 0 && ms.Y < Globals.SpriteBatch.GraphicsDevice.PresentationParameters.BackBufferHeight
                         && Globals.Game.IsActive;
 
-            MouseClicked = (ms.LeftButton == ButtonState.Pressed)
-                            && (_lastMouseState.LeftButton == ButtonState.Released)
+            MouseClicked = ms.LeftButton == ButtonState.Pressed
+                            && _lastMouseState.LeftButton == ButtonState.Released
                             && onscreen;
-            MouseRightClicked = (ms.RightButton == ButtonState.Pressed)
-                            && (_lastMouseState.RightButton == ButtonState.Released)
+            MouseRightClicked = ms.RightButton == ButtonState.Pressed
+                            && _lastMouseState.RightButton == ButtonState.Released
                             && onscreen;
             _lastMouseState = ms;
 

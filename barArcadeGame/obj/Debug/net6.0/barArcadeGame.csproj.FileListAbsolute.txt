@@ -88,7 +88,6 @@ C:\Users\humao\source\repos\barArcadeGame\bin\Debug\net6.0\MonoGame.Extended.Gra
 C:\Users\humao\source\repos\barArcadeGame\bin\Debug\net6.0\MonoGame.Extended.Tiled.dll
 C:\Users\humao\source\repos\barArcadeGame\bin\Debug\net6.0\Newtonsoft.Json.dll
 C:\Users\humao\source\repos\barArcadeGame\bin\Debug\net6.0\GeonBit.UI.DataTypes.dll
-C:\Users\humao\source\repos\barArcadeGame\bin\Debug\net6.0\GeonBit.UI.dll
 C:\Users\humao\source\repos\barArcadeGame\bin\Debug\net6.0\Content\GeonBit.UI\themes\editor\effects\disabled.xnb
 C:\Users\humao\source\repos\barArcadeGame\bin\Debug\net6.0\Content\GeonBit.UI\themes\editor\effects\silhouette.xnb
 C:\Users\humao\source\repos\barArcadeGame\bin\Debug\net6.0\Content\GeonBit.UI\themes\editor\fonts\Bold.spritefont
@@ -675,10 +674,12 @@ C:\Users\humao\source\repos\barArcadeGame\bin\Debug\net6.0\Content\GeonBit.UI\th
 C:\Users\humao\source\repos\barArcadeGame\bin\Debug\net6.0\Content\GeonBit.UI\themes\lowres\textures\slider_fancy_md.xml
 C:\Users\humao\source\repos\barArcadeGame\bin\Debug\net6.0\Content\GeonBit.UI\themes\lowres\textures\white_texture.xnb
 C:\Users\humao\source\repos\barArcadeGame\bin\Debug\net6.0\Content\GeonBit.UI\themes\lowres\ThemeData.xml
-C:\Users\humao\source\repos\barArcadeGame\bin\Debug\net6.0\MonoGame.UI.Forms.dll
 C:\Users\humao\source\repos\barArcadeGame\bin\Debug\net6.0\Content\defaultFont.spritefont
 C:\Users\humao\source\repos\barArcadeGame\bin\Debug\net6.0\Content\Font\defaultFont.spritefont
 C:\Users\humao\source\repos\barArcadeGame\bin\Debug\net6.0\Content\Font\defaultFont.xnb
 C:\Users\humao\source\repos\barArcadeGame\bin\Debug\net6.0\Content\picture\coin.xnb
 C:\Users\humao\source\repos\barArcadeGame\bin\Debug\net6.0\Content\picture\exit.xnb
 C:\Users\humao\source\repos\barArcadeGame\bin\Debug\net6.0\Content\picture\next.xnb
+C:\Users\humao\source\repos\barArcadeGame\bin\Debug\net6.0\Content\picture\checked.xnb
+C:\Users\humao\source\repos\barArcadeGame\bin\Debug\net6.0\Content\picture\unchecked.xnb
+C:\Users\humao\source\repos\barArcadeGame\bin\Debug\net6.0\Content\picture\hero.xnb

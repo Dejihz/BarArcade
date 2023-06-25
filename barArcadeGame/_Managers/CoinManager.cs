@@ -1,6 +1,4 @@
-﻿using barArcadeGame;
-using GeonBit.UI.Utils;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
@@ -10,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace barArcadeGame
+namespace barArcadeGame._Managers
 {
     public static class CoinManager
     {
@@ -24,7 +22,7 @@ namespace barArcadeGame
         public static bool Active { get; private set; }
         private const string _fileName = "highscores.dat";
         public static int Coins { get; set; } = new();
-        public static Label Label { get; set; } 
+        public static Label Label { get; set; }
 
         public static void Init(Texture2D tex)
         {
@@ -37,10 +35,10 @@ namespace barArcadeGame
 
             Label = new(font, new(37, Globals.Bounds.Y - 32));
             //Label.SetText("This is a label.");
-      
+
 
             Console.WriteLine(Label.Text);
-            
+
             _texture = new Texture2D(Globals.SpriteBatch.GraphicsDevice, 1, 1);
             _texture.SetData(new Color[] { new(200, 80, 30) });
             _rectangle = new(0, 0, Globals.Bounds.X, 80);
@@ -71,7 +69,7 @@ namespace barArcadeGame
         }
 
         public static void SaveCoins()
-        {         
+        {
             UpdateCoinsLabel();
 
             using BinaryWriter binaryWriter = new(File.Create(_fileName));
@@ -121,10 +119,9 @@ namespace barArcadeGame
 
         public static void Draw()
         {
+           // Globals.SpriteBatch.Begin();
             Label.SetText(Coins.ToString());
             Label.Draw();
-            //DrawCoins();
-            //Label.Draw(Coins.ToString());
             Globals.SpriteBatch.Draw(_textureCoin, new(0, Globals.Bounds.Y - 40), null, Color.White * 0.75f, 0f, Vector2.Zero, 0.1f, SpriteEffects.None, 1f);
             //Globals.SpriteBatch.Draw(_texture, _rectangle, null, Color.White, 0, Vector2.Zero, SpriteEffects.None, 1);
         }

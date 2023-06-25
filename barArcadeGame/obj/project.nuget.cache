@@ -1,11 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "a4l3XinYPKcqqKwQWtZBWZ+eN4hcTNV5ntd64tuCFYefLXBizDiwNY9nzYQuzvtL6RToH3nC1W4uuiCJ74PXEA==",
+  "dgSpecHash": "ph3lNM7HHHvWZChgc0qPBUdmCRjyjaN4YVcnbwdhflgfnYsSwmMeeghrtdCWDnpoiFITfVwy/EahS1I8/csuPg==",
   "success": true,
   "projectFilePath": "C:\\Users\\humao\\source\\repos\\barArcadeGame\\barArcadeGame.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\humao\\.nuget\\packages\\autofac\\5.2.0\\autofac.5.2.0.nupkg.sha512",
-    "C:\\Users\\humao\\.nuget\\packages\\geonbit.ui\\4.1.0.1\\geonbit.ui.4.1.0.1.nupkg.sha512",
     "C:\\Users\\humao\\.nuget\\packages\\monogame.content.builder.task\\3.8.1.303\\monogame.content.builder.task.3.8.1.303.nupkg.sha512",
     "C:\\Users\\humao\\.nuget\\packages\\monogame.extended\\3.8.0\\monogame.extended.3.8.0.nupkg.sha512",
     "C:\\Users\\humao\\.nuget\\packages\\monogame.extended.content.pipeline\\3.8.0\\monogame.extended.content.pipeline.3.8.0.nupkg.sha512",

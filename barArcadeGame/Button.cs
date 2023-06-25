@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using barArcadeGame._Managers;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using MonoGame.Extended.Sprites;
 using System;
@@ -7,8 +8,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace barArcadeGame 
-{ 
+namespace barArcadeGame
+{
     public class Button : Sprite
     {
         private readonly Rectangle _rectangle;

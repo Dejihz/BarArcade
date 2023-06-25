@@ -16,6 +16,7 @@ namespace barArcadeGame
         public Texture2D Texture { get; protected set; }
         protected Vector2 scale;
         protected Color color;
+        public float Rotation { get; set; }
 
         public Sprite(Texture2D tex, Vector2 pos)
         {
