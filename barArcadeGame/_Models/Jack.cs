@@ -35,14 +35,13 @@ public class Jack
         _anims.AddAnimation(new Vector2(-1, -1), new(heroTexture, 8, 8, 0.1f, 6));
         _anims.AddAnimation(new Vector2(1, 1), new(heroTexture, 8, 8, 0.1f, 7));
         _anims.AddAnimation(new Vector2(1, -1), new(heroTexture, 8, 8, 0.1f, 8));
-        _anims.AddAnimation(new Vector2(0, 0), new(heroTexture, 8, 8, 20f));
+        _anims.AddAnimation(new Vector2(0, 0), new(heroTexture, 8, 8, 2000f));
     }
 
     public void Update()
     {
         // Update NPC logic here
 
-        //playerBounds.X = 0;
         // Check if NPC reached the boundaries
         if (!toStop)
         {

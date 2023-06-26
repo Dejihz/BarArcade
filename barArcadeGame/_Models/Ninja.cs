@@ -34,7 +34,7 @@ public class Ninja
         _anims.AddAnimation(new Vector2(-1, -1), new(ninjaTexture, 4, 7, 0.1f, 6));
         _anims.AddAnimation(new Vector2(1, 1), new(ninjaTexture, 4, 7, 0.1f, 7));
         _anims.AddAnimation(new Vector2(1, -1), new(ninjaTexture, 4, 7, 0.1f, 8));
-        _anims.AddAnimation(new Vector2(0, 0), new(ninjaTexture, 8, 8, 20f));
+        _anims.AddAnimation(new Vector2(0, 0), new(ninjaTexture, 4, 7, 20f));
     }
 
     public void Update()

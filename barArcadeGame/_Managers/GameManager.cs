@@ -1,7 +1,9 @@
 ﻿using barArcadeGame._Models;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
 using MonoGame.Extended;
+using MonoGame.Extended.Sprites;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -16,15 +18,22 @@ namespace barArcadeGame._Managers
         public Matrix _translation;
         DialogueManager diaMick;
         DialogueJackManager diaJack;
-  
+        private readonly List<Button> _buttons = new();
+        //public static Button NextBtn { get; private set; }
+        //public static Button ExitBtn { get; private set; }
+
         public GameManager()
         {
+            SoundManager.Init();
             CoinManager.Init(Globals.Content.Load<Texture2D>("picture/coin"));
+          
             IsJackDialogueRun = false;
             IsMickDialogueRun = false;
             diaJack = new DialogueJackManager();
             diaMick = new DialogueManager();
             List<string> list = new();
+            AddButton(SoundManager.MusicBtn);
+            AddButton(SoundManager.SoundBtn);
         }
 
         public void runMickDialogue()
@@ -34,6 +43,12 @@ namespace barArcadeGame._Managers
                 diaMick.Init();
                 IsMickDialogueRun = true;
             }
+        }
+
+        private Button AddButton(Button button)
+        {
+            _buttons.Add(button);
+            return button;
         }
 
         public void hideMickDialogue()
@@ -50,6 +65,7 @@ namespace barArcadeGame._Managers
             if (!IsJackDialogueRun)
             {
                 diaJack.Init();
+
                 IsJackDialogueRun = true;
             }
         }
@@ -61,10 +77,15 @@ namespace barArcadeGame._Managers
                 diaJack.HideAllSpritesAndTextures();
                 IsJackDialogueRun = false;
             }
-        }
+        }  
 
         public void Update()
         {
+            foreach (var button in _buttons)
+            {
+                button.Update();
+            }
+
             if (IsJackDialogueRun)
             {
                 diaJack.Update();
@@ -86,7 +107,13 @@ namespace barArcadeGame._Managers
             Globals.SpriteBatch.Begin();
             CoinManager.Draw();
             Globals.SpriteBatch.End();
-           
+
+            Globals.SpriteBatch.Begin();
+            foreach (var button in _buttons)
+            {
+                button.Draw();
+            }
+            Globals.SpriteBatch.End();
 
             Globals.SpriteBatch.Begin();
             if (IsJackDialogueRun)

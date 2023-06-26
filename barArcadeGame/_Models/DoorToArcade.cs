@@ -27,8 +27,6 @@ namespace barArcadeGame._Models
             _anims.AddAnimation(2, new(doorTex, 7, 2, 2000f, 2));
         }
 
-  
-
         public void Update()
         {
             if (!touch)
@@ -36,10 +34,8 @@ namespace barArcadeGame._Models
                 _anims.Update(2);
             }
             if (touch)
-            {
-               
-                _anims.Update(1);
-         
+            {             
+                _anims.Update(1);        
             }
         }
 

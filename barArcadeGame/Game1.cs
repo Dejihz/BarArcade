@@ -6,15 +6,15 @@ using MonoGame.Extended.Content;
 using MonoGame.Extended.Serialization;
 using MonoGame.Extended.Sprites;
 using System;
-using System.Numerics;
 using barArcadeGame._Models;
 using TiledSharp;
-using System.Collections.Generic;
-using System.Runtime.ConstrainedExecution;
-using Vector2 = Microsoft.Xna.Framework.Vector2;
 using barArcadeGame._Managers;
 using System.Collections;
 using MonoGame.Extended.Timers;
+using System.Collections.Generic;
+using System.Threading;
+using System.Timers;
+using Newtonsoft.Json.Linq;
 
 namespace barArcadeGame
 {
@@ -37,9 +37,9 @@ namespace barArcadeGame
         private DoorToArcade door;
         private DoorToArcade doorToBar;
         private ArcadeMachine arcadeMachine;
-        private bool isWaiting;
-        private TimeSpan waitTime;
-        private DateTime startTime;
+
+        private float _timer;
+        private const float DelayInSeconds = 1.0f;
 
         public Game1()
         {
@@ -60,6 +60,7 @@ namespace barArcadeGame
             Globals.Game = this; 
             currentScene = "bar";
             player = new Player();
+            
             Window.Title = "Bararcade Game";
             Globals.Bounds = new(1000, 1000);
             _graphics.PreferredBackBufferWidth = Globals.Bounds.X;
@@ -151,8 +152,9 @@ namespace barArcadeGame
             {
                 if (rect.Intersects(player.playerBounds))
                 {
-                    player.pos = initpos;
+                    player.pos = initpos;               
                     player.isIdle = true;
+                    SoundManager.PlayCollideFx();
                 }
             }
 
@@ -166,23 +168,14 @@ namespace barArcadeGame
             
             if (player.playerBounds.Intersects(door.bounds))
             {
-                door.touch = true;
-                LoadSecondScene();
-                //Wait(TimeSpan.FromSeconds(3));
-                //if (isWaiting)
-                //{
-                //    // Calculate the elapsed time since waiting started
-                //    TimeSpan elapsed = DateTime.Now - startTime;
-
-                //    // Check if the desired wait time has passed
-                //    if (elapsed >= waitTime)
-                //    {
-                //        // Wait time has passed, continue with the game logic
-                //        isWaiting = false;
-                //        // Perform any actions you want after the wait
-                       
-                //    }
-                //}
+                door.touch = true;               
+                _timer += (float)gameTime.ElapsedGameTime.TotalSeconds;
+                if (_timer >= DelayInSeconds)
+                {
+                    _timer = 0;
+                    SoundManager.PlayDoorOpenFX();
+                    LoadSecondScene(); 
+                }
             }
             else
             {
@@ -191,7 +184,7 @@ namespace barArcadeGame
 
             if (jack.playerBounds.Intersects(player.playerBounds))
             {
-                jack.stop();
+                jack.stop();             
                 _gameManager.runJackDialogue();
             } 
             else
@@ -204,13 +197,6 @@ namespace barArcadeGame
             door.Update();
             calculateTransaction();
             Globals.Update(gameTime);
-        }
-
-        private void Wait(TimeSpan duration)
-        {
-            isWaiting = true;
-            waitTime = duration;
-            startTime = DateTime.Now;
         }
 
         public void updateArcadeScene(GameTime gameTime)
@@ -230,33 +216,16 @@ namespace barArcadeGame
                 }
             }
 
-            foreach (var rect in collisionDoor)
-            {
-                if (rect.Intersects(player.playerBounds))
-                {
-                    LoadSecondScene();                   
-                }
-            }
-
             if (player.playerBounds.Intersects(doorToBar.bounds))
             {
                 door.touch = true;
-                LoadContent();
-                //Wait(TimeSpan.FromSeconds(3));
-                //if (isWaiting)
-                //{
-                //    // Calculate the elapsed time since waiting started
-                //    TimeSpan elapsed = DateTime.Now - startTime;
-
-                //    // Check if the desired wait time has passed
-                //    if (elapsed >= waitTime)
-                //    {
-                //        // Wait time has passed, continue with the game logic
-                //        isWaiting = false;
-                //        // Perform any actions you want after the wait
-
-                //    }
-                //}
+                _timer += (float)gameTime.ElapsedGameTime.TotalSeconds;
+                if (_timer >= DelayInSeconds)
+                {
+                    _timer = 0;
+                    SoundManager.PlayDoorOpenFX();
+                    LoadContent(); 
+                }
             }
             else
             {
@@ -318,7 +287,6 @@ namespace barArcadeGame
                 player.Draw(_spriteBatch, matrix, transformMatrix: _translation);
                 jack.Draw(_spriteBatch, matrix, transformMatrix: _translation);                      
                 _gameManager.Draw();
-                
             }
             else if(currentScene == "arcade")
             {

@@ -104,3 +104,12 @@ C:\Users\humao\source\repos\barArcadeGame\bin\Debug\net6.0\Content\arcade\arcade
 C:\Users\humao\source\repos\barArcadeGame\bin\Debug\net6.0\Content\picture\door.xnb
 C:\Users\humao\source\repos\barArcadeGame\bin\Debug\net6.0\Content\picture\arcadeMachine.xnb
 C:\Users\humao\source\repos\barArcadeGame\bin\Debug\net6.0\Content\picture\ninja.xnb
+C:\Users\humao\source\repos\barArcadeGame\bin\Debug\net6.0\Content\Sound\flip.xnb
+C:\Users\humao\source\repos\barArcadeGame\bin\Debug\net6.0\Content\Sound\music.ogg
+C:\Users\humao\source\repos\barArcadeGame\bin\Debug\net6.0\Content\Sound\music.xnb
+C:\Users\humao\source\repos\barArcadeGame\bin\Debug\net6.0\Content\Sound\tear.xnb
+C:\Users\humao\source\repos\barArcadeGame\bin\Debug\net6.0\Content\Sound\victory.ogg
+C:\Users\humao\source\repos\barArcadeGame\bin\Debug\net6.0\Content\Sound\victory.xnb
+C:\Users\humao\source\repos\barArcadeGame\bin\Debug\net6.0\Content\picture\music.xnb
+C:\Users\humao\source\repos\barArcadeGame\bin\Debug\net6.0\Content\picture\sounds.xnb
+C:\Users\humao\source\repos\barArcadeGame\bin\Debug\net6.0\Content\picture\win.xnb
