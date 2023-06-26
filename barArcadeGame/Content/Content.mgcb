@@ -63,6 +63,18 @@
 /processorParam:TextureFormat=Color
 /build:picture/arcadeMachine.png
 
+#begin picture/arcadeMachine.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:picture/arcadeMachine.png
+
 #begin picture/checked.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -206,6 +218,18 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:picture/next.png
+
+#begin picture/ninja.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:picture/ninja.png
 
 #begin picture/unchecked.png
 /importer:TextureImporter

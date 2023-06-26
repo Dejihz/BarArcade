@@ -8,7 +8,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using MonoGame.Extended;
 
-namespace barArcadeGame._ModelsJack
+namespace barArcadeGame._Models
 {
     internal class DoorToArcade
     {

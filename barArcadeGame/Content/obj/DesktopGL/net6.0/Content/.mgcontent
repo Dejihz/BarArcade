@@ -14,6 +14,7 @@
     <File>C:/Users/humao/source/repos/barArcadeGame/Content/picture/exit.png</File>
     <File>C:/Users/humao/source/repos/barArcadeGame/Content/picture/hero.png</File>
     <File>C:/Users/humao/source/repos/barArcadeGame/Content/picture/next.png</File>
+    <File>C:/Users/humao/source/repos/barArcadeGame/Content/picture/ninja.png</File>
     <File>C:/Users/humao/source/repos/barArcadeGame/Content/picture/unchecked.png</File>
     <File>C:/Users/humao/source/repos/barArcadeGame/Content/Spaceship 3/Spaceship 3.png</File>
     <File>C:/Users/humao/source/repos/barArcadeGame/Content/testTile/55.png</File>
@@ -72,6 +73,7 @@
     <File>C:/Users/humao/source/repos/barArcadeGame/Content/Tiny Adventure Pack/Skeleton/Walk/Skel_walk_up.png</File>
   </SourceFiles>
   <DestFiles>
+    <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />

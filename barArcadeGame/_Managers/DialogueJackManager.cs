@@ -50,6 +50,8 @@ namespace barArcadeGame._Managers
 
                 new Question("What food you would like to order?", new List<string> { "Bread", "Soup", "Pasta" }),
                 new Question("Which drink you would like to choose?", new List<string> { "coffee", "lemon joice", "red tea" }),
+                new Question("Here you are the food, enjoy!", new List<string> {  }),
+                new Question("Here you are the drink, enjoy!", new List<string> {  }),
             };
 
             _checkboxChecked = Globals.Content.Load<Texture2D>("picture/checked");
@@ -169,13 +171,16 @@ namespace barArcadeGame._Managers
                     else if (_questions[_currentQuestionIndex].Options[_selectedOption].Equals("Order drinks"))
                     {
                         _currentQuestionIndex = 4;
-
                     }
                     else
                     {
                         if (_currentQuestionIndex == 3)
                         {
                             _currentQuestionIndex = 5;
+                        }
+                        else if(_currentQuestionIndex == 4)
+                        {
+                            _currentQuestionIndex = 6;
                         }
                         else
                         {
@@ -185,6 +190,10 @@ namespace barArcadeGame._Managers
                 }
                 else
                 {
+                    if (_currentQuestionIndex == 5)
+                    {
+                        _currentQuestionIndex = 7;
+                    }
                     _currentQuestionIndex++;
                 }
             }

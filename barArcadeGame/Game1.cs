@@ -7,7 +7,7 @@ using MonoGame.Extended.Serialization;
 using MonoGame.Extended.Sprites;
 using System;
 using System.Numerics;
-using barArcadeGame._ModelsJack;
+using barArcadeGame._Models;
 using TiledSharp;
 using System.Collections.Generic;
 using System.Runtime.ConstrainedExecution;
@@ -15,7 +15,6 @@ using Vector2 = Microsoft.Xna.Framework.Vector2;
 using barArcadeGame._Managers;
 using System.Collections;
 using MonoGame.Extended.Timers;
-using barArcadeGame._ModelsJack;
 
 namespace barArcadeGame
 {
@@ -24,9 +23,8 @@ namespace barArcadeGame
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
         private Player player;
-        //private NPCJack jack;
+        private Ninja ninja;
         private Jack jack;
-        private NPCMick mick;
         private TmxMap map;
         private TileMapManager mapManager1;
         private TileMapManager mapManager;
@@ -59,12 +57,9 @@ namespace barArcadeGame
 
         protected override void Initialize()
         {      
-            Globals.Game = this;
-   
+            Globals.Game = this; 
             currentScene = "bar";
             player = new Player();
-            mick = new NPCMick();
-
             Window.Title = "Bararcade Game";
             Globals.Bounds = new(1000, 1000);
             _graphics.PreferredBackBufferWidth = Globals.Bounds.X;
@@ -106,7 +101,7 @@ namespace barArcadeGame
             doorToBar = new DoorToArcade(new Vector2(230,100));
             var arcadeTexture = Globals.Content.Load<Texture2D>("picture/arcadeMachine");
             arcadeMachine = new ArcadeMachine(arcadeTexture,new Vector2(100, 60));
-
+            ninja = new Ninja();
             _gameManager = new();
         }
 
@@ -139,7 +134,6 @@ namespace barArcadeGame
                                     Content.Load<SpriteSheet>("Tiny Adventure Pack/Character/char_two/Walk/playerSheetWalk.sf",new JsonContentLoader())};
   
             player.Load(sheets, new Vector2(600,50));
-            mick.Load(sheets);
            
             jack = new Jack();
             door = new DoorToArcade(new Vector2(0, 285));
@@ -204,16 +198,7 @@ namespace barArcadeGame
             {
                 jack.walk();
                 _gameManager.hideJackDialogue();
-            }
-
-            if (mick.playerBounds.Intersects(player.playerBounds))
-            {
-                _gameManager.runMickDialogue();
-            }
-            else
-            {
-                _gameManager.hideMickDialogue();
-            }
+            }         
 
             _gameManager.Update();
             door.Update();
@@ -234,7 +219,8 @@ namespace barArcadeGame
                 Exit();
             var initpos = player.pos;
             player.Update(gameTime);
-            jack.Update();
+
+            ninja.Update();
             foreach (var rect in collisionObjects)
             {
                 if (rect.Intersects(player.playerBounds))
@@ -277,33 +263,23 @@ namespace barArcadeGame
                 door.touch = false;
             }
 
+            if (ninja.playerBounds.Intersects(player.playerBounds))
+            {
+                ninja.stop();
+                _gameManager.runMickDialogue();
+            }
+            else
+            {
+                ninja.walk();
+                _gameManager.hideMickDialogue();
+            }
+
             if (arcadeMachine._rectangle.Intersects(player.playerBounds))
             {
                 currentScene = "close Scenes";
                 runArcadeGame();      
             }
 
-            if (jack.playerBounds.Intersects(player.playerBounds))
-            {
-                jack.stop();
-                _gameManager.runJackDialogue();
-            }
-            else
-            {
-                jack.walk();
-                _gameManager.hideJackDialogue();
-            }
-
-            if (mick.playerBounds.Intersects(player.playerBounds))
-            {
-                _gameManager.runMickDialogue();
-            }
-            else
-            {
-                _gameManager.hideMickDialogue();
-            }
-
-            // TODO: Add your update logic
             _gameManager.Update();
             doorToBar.Update();
             arcadeMachine.Update();
@@ -333,18 +309,14 @@ namespace barArcadeGame
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
-            // _spriteBatch.Begin();
-            //mapManager.Draw(matrix, _translation);
-            //player.Draw(_spriteBatch, matrix, transformMatrix: _translation);
+
             if (currentScene == "bar")
             {
                 // TODO: Add your drawing code here       
                 mapManager.Draw(matrix, _translation);
                 door.Draw(_spriteBatch, matrix, transformMatrix: _translation);
                 player.Draw(_spriteBatch, matrix, transformMatrix: _translation);
-                jack.Draw(_spriteBatch, matrix, transformMatrix: _translation);
-                mick.Draw(_spriteBatch, matrix, transformMatrix: _translation);
-              
+                jack.Draw(_spriteBatch, matrix, transformMatrix: _translation);                      
                 _gameManager.Draw();
                 
             }
@@ -353,17 +325,11 @@ namespace barArcadeGame
                 mapManager.Draw(matrix, _translation);
                 doorToBar.Draw(_spriteBatch, matrix, transformMatrix: _translation);
                 player.Draw(_spriteBatch, matrix, transformMatrix: _translation);
-                //_spriteBatch.Begin();
+                ninja.Draw(_spriteBatch, matrix, transformMatrix: _translation);       
                 arcadeMachine.Draw(_spriteBatch, matrix, transformMatrix: _translation);
-                //_spriteBatch.End();
+                _gameManager.Draw();
             }
 
-
-            // _spriteBatch.DrawString(spriteFont, "Hello, World!", new System.Numerics.Vector2(100, 100), Color.White);
-
-
-            // jack.Draw(Globals.SpriteBatch, Globals.Matrix, transformMatrix: _translation);
-            // _spriteBatch.End();
             base.Draw(gameTime);
         }
     }

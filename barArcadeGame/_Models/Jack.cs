@@ -1,6 +1,4 @@
 namespace barArcadeGame;
-
-using barArcadeGame._Managers;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using MonoGame.Extended;

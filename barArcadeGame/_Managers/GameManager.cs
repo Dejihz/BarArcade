@@ -1,4 +1,4 @@
-﻿using barArcadeGame._ModelsJack;
+﻿using barArcadeGame._Models;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using MonoGame.Extended;
@@ -16,8 +16,6 @@ namespace barArcadeGame._Managers
         public Matrix _translation;
         DialogueManager diaMick;
         DialogueJackManager diaJack;
-        //DoorToArcade Door { get; set; }
-       // Jack _jack = new ();
   
         public GameManager()
         {
@@ -26,7 +24,6 @@ namespace barArcadeGame._Managers
             IsMickDialogueRun = false;
             diaJack = new DialogueJackManager();
             diaMick = new DialogueManager();
-            //Door = new DoorToArcade();
             List<string> list = new();
         }
 
@@ -102,7 +99,6 @@ namespace barArcadeGame._Managers
                 diaMick.Draw();
             }
             Globals.SpriteBatch.End();
-            //Door.Draw();
         }
     }
 }

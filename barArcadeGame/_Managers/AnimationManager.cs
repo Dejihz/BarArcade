@@ -34,4 +34,11 @@ public class AnimationManager
     {
         _anims[_lastKey].Draw(position);
     }
+
+    public void DrawNinja(Vector2 pos)
+    {
+        _anims[_lastKey].DrawNinja(pos);
+    }
+
+   
 }

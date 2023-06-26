@@ -103,3 +103,4 @@ C:\Users\humao\source\repos\barArcadeGame\bin\Debug\net6.0\Content\arcade\items.
 C:\Users\humao\source\repos\barArcadeGame\bin\Debug\net6.0\Content\arcade\arcadeRoom.tmx
 C:\Users\humao\source\repos\barArcadeGame\bin\Debug\net6.0\Content\picture\door.xnb
 C:\Users\humao\source\repos\barArcadeGame\bin\Debug\net6.0\Content\picture\arcadeMachine.xnb
+C:\Users\humao\source\repos\barArcadeGame\bin\Debug\net6.0\Content\picture\ninja.xnb

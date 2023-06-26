@@ -1,7 +1,6 @@
 namespace barArcadeGame;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-//using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System.Collections.Generic;
 
@@ -62,5 +61,10 @@ public class Animation
     public void Draw(Vector2 pos)
     {
         Globals.SpriteBatch.Draw(_texture, pos, _sourceRectangles[_frame], Color.White, 0, Vector2.Zero, Vector2.One, SpriteEffects.None, 1);
+    }
+
+    public void DrawNinja(Vector2 pos)
+    {
+        Globals.SpriteBatch.Draw(_texture, pos, _sourceRectangles[_frame], Color.White, 0, Vector2.Zero, new Vector2(3,3), SpriteEffects.None, 1);
     }
 }
